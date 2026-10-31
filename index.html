@@ -7,23 +7,32 @@
 
   <!-- Primary SEO Meta Tags -->
   <meta name="title" content="World Trading Time-Navigator & Live Economic Sync Pro">
-  <meta name="description" content="Aplikasi Integrated Real-Time Session Clock, Liquidity Profile, & Live Economic Calendar (ISM, NFP, CPI, PPI, FOMC, PCE) dengan Sistem Alert Otomatis.">
+  <meta name="description" content="Integrated Real-Time Session Clock, Liquidity Profile, & Live Economic Calendar (ISM, NFP, CPI, PPI, FOMC, PCE) with Automatic High-Impact Alerts.">
+  <meta name="author" content="World Trading Navigator">
   <meta name="theme-color" content="#080c14">
 
   <!-- Open Graph / Social Media Preview Cards -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://domain-anda.com/">
+  <meta property="og:url" content="https://gyoutrain-lab.github.io/TRADING_Market_TimingZoneCalendar/">
   <meta property="og:title" content="World Trading Time-Navigator & Live Economic Sync Master Pro">
   <meta property="og:description" content="Integrasi Real-Time Jam Trading Dunia & Kalender Ekonomi High-Impact dengan Alarm Suara & Push Notification.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&h=630&q=80">
+  <meta property="og:image" content="https://raw.githubusercontent.com/gyoutrain-lab/TRADING_Market_TimingZoneCalendar/main/TimeTrade.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Trading Time Navigator">
+
+  <!-- Twitter / X Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://gyoutrain-lab.github.io/TRADING_Market_TimingZoneCalendar/">
+  <meta name="twitter:title" content="World Trading Time-Navigator & Economic Calendar">
+  <meta name="twitter:description" content="Panduan Waktu Trading Real-Time, Overlap Sesi, & Kalender Ekonomi High-Impact (NFP, CPI, FOMC).">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/gyoutrain-lab/TRADING_Market_TimingZoneCalendar/main/TimeTrade.jpg">
 
   <!-- Apple & PWA Capabilities -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=192&h=192&q=80">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=32&h=32&q=80">
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/gyoutrain-lab/TRADING_Market_TimingZoneCalendar/main/TimeTrade.jpg">
+  <link rel="icon" type="image/jpeg" sizes="32x32" href="https://raw.githubusercontent.com/gyoutrain-lab/TRADING_Market_TimingZoneCalendar/main/TimeTrade.jpg">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -711,6 +720,25 @@
       }
     }
 
+    // Export Data Utility Method for Handling High Traffic/Overload Data Offloading
+    function exportTradingDataMethod(eventObj) {
+      const exportPayload = {
+        timestamp: new Date().toISOString(),
+        systemState: isRealtime ? 'REALTIME' : 'SIMULATED',
+        simulatedTime: sliderValText.innerText,
+        activeEvents: eventObj || {},
+        timeZone: 'Asia/Jakarta (WIB)'
+      };
+
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportPayload, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `Trading_Sync_Snapshot_${Date.now()}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
     // Render Calendar Matrix
     function renderEconomicCalendar() {
       calendarGrid.innerHTML = '';
@@ -894,7 +922,7 @@
         if (diffMin >= 0 && diffMin <= 30) {
           bannerTitle.innerText = `🚨 REMINDER: ${todayEvent.name} (${diffMin} MNT LAGI)`;
           bannerTitle.style.color = '#ef4444';
-          bannerDesc.innerText = `Waktu rlis: ${todayEvent.timeStr}. ${todayEvent.desc}`;
+          bannerDesc.innerText = `Waktu rilis: ${todayEvent.timeStr}. ${todayEvent.desc}`;
           eventBanner.classList.add('alert-active');
 
           if (lastAlertDayTriggered !== day) {
@@ -904,7 +932,7 @@
             if ('Notification' in window && Notification.permission === 'granted') {
               new Notification(`🚨 RILIS BERITA: ${todayEvent.name}`, {
                 body: `Data rilis dalam ${diffMin} menit (${todayEvent.timeStr}). Persiapkan risk management!`,
-                icon: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=192&h=192&q=80'
+                icon: 'https://raw.githubusercontent.com/gyoutrain-lab/TRADING_Market_TimingZoneCalendar/main/TimeTrade.jpg'
               });
             }
           }
@@ -1012,7 +1040,9 @@
       }
     });
 
+    // Integrated .ICS and Export Method Handler
     btnExportCalendar.addEventListener('click', () => {
+      // 1. Trigger ICS Calendar File Creation
       const icsData = 
 `BEGIN:VCALENDAR
 VERSION:2.0
@@ -1041,6 +1071,10 @@ END:VCALENDAR`;
       a.download = 'Economic_Sync_Calendar.ics';
       a.click();
       window.URL.revokeObjectURL(url);
+
+      // 2. Perform Export Method to offload data snapshot when requested or under load
+      const now = new Date();
+      exportTradingDataMethod(economicEvents[now.getDate()]);
     });
 
     // Init Engine
