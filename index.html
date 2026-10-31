@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>World Trading Time-Navigator & Live Economic Sync Master Pro</title>
+
+  <!-- Primary SEO Meta Tags -->
+  <meta name="title" content="World Trading Time-Navigator & Live Economic Sync Pro">
+  <meta name="description" content="Aplikasi Integrated Real-Time Session Clock, Liquidity Profile, & Live Economic Calendar (ISM, NFP, CPI, PPI, FOMC, PCE) dengan Sistem Alert Otomatis.">
+  <meta name="theme-color" content="#080c14">
+
+  <!-- Open Graph / Social Media Preview Cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://domain-anda.com/">
+  <meta property="og:title" content="World Trading Time-Navigator & Live Economic Sync Master Pro">
+  <meta property="og:description" content="Integrasi Real-Time Jam Trading Dunia & Kalender Ekonomi High-Impact dengan Alarm Suara & Push Notification.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&h=630&q=80">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Apple & PWA Capabilities -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=192&h=192&q=80">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=32&h=32&q=80">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #080c14;
+      --panel-bg: rgba(16, 23, 38, 0.75);
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --color-asia: #f59e0b;
+      --color-london: #10b981;
+      --color-ny: #3b82f6;
+      --color-overlap: #ef4444;
+      --color-gold: #fbbf24;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 15px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Header Area */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(16px);
+      border-radius: 20px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--color-gold), var(--color-london));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 22px;
+      color: #000;
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+    }
+
+    .brand-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--panel-border);
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 12px #10b981;
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* Main Layout */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(16px);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .card-title {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* SVG Radial Clock */
+    .clock-wrapper {
+      position: relative;
+      width: 310px;
+      height: 310px;
+      margin: 10px 0;
+    }
+
+    svg.radial-clock {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .clock-center-info {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .time-digital {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+    }
+
+    .session-active-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      margin-top: 4px;
+    }
+
+    .timezone-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Controls & Slider */
+    .controls-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .slider-box {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--color-london);
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .btn {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--panel-border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(251, 191, 36, 0.2));
+      border-color: rgba(251, 191, 36, 0.4);
+    }
+
+    /* Calendar Matrix */
+    .cal-header {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--panel-border);
+    }
+
+    .cal-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .cal-day {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cal-day:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--color-gold);
+    }
+
+    .cal-day.empty {
+      background: transparent;
+      border: none;
+      cursor: default;
+    }
+
+    .cal-day.event {
+      border: 2px solid var(--color-gold);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.25);
+    }
+
+    .cal-day.today {
+      background: rgba(16, 185, 129, 0.2) !important;
+      border-color: #10b981 !important;
+      color: #fff;
+    }
+
+    .cal-day.active-news-day {
+      animation: newsGlow 1.5s infinite alternate;
+    }
+
+    @keyframes newsGlow {
+      from { box-shadow: 0 0 10px rgba(239, 68, 68, 0.4); border-color: #ef4444; }
+      to { box-shadow: 0 0 25px rgba(239, 68, 68, 0.9); border-color: #ef4444; }
+    }
+
+    .event-badge {
+      font-size: 0.6rem;
+      font-weight: 800;
+      color: var(--color-gold);
+      margin-top: 2px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Live Event Banner */
+    .event-banner {
+      width: 100%;
+      background: rgba(251, 191, 36, 0.08);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .event-banner.alert-active {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: #ef4444;
+      animation: alertPulse 1s infinite alternate;
+    }
+
+    @keyframes alertPulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.01); }
+    }
+
+    .banner-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-gold);
+    }
+
+    .banner-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* Canvas Liquidity */
+    .chart-box {
+      width: 100%;
+      height: 160px;
+      position: relative;
+    }
+
+    canvas#liquidityCanvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Session List */
+    .session-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .session-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+    }
+
+    .session-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .session-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+    }
+
+    .session-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .session-time {
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+    }
+
+    .session-tag {
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    .tag-active {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .tag-overlap {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--panel-border);
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo-area">
+        <div class="logo-icon">⚡</div>
+        <div>
+          <div class="brand-title">LIVE TIME & ECONOMIC SYNC MASTER</div>
+          <div class="brand-subtitle">Synchronized Real-Time Session Clock & High-Impact Alert Engine</div>
+        </div>
+      </div>
+      <div class="status-badge" id="marketStateBadge">
+        <div class="status-dot" id="statusDot"></div>
+        <span id="marketStateText">SYNCHRONIZING ENGINE...</span>
+      </div>
+    </header>
+
+    <!-- Top Grid -->
+    <div class="dashboard-grid">
+      
+      <!-- Card 1: 24-Hour Dial -->
+      <div class="card">
+        <div class="card-title">
+          <span>24-Hour Radial Session (WIB)</span>
+          <span id="liveDateText">--/--/----</span>
+        </div>
+
+        <div class="clock-wrapper">
+          <svg class="radial-clock" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8" />
+            
+            <circle id="arcAsia" cx="100" cy="100" r="82" fill="none" stroke="var(--color-asia)" stroke-width="6" stroke-dasharray="452" stroke-dashoffset="282" />
+            <circle id="arcLondon" cx="100" cy="100" r="72" fill="none" stroke="var(--color-london)" stroke-width="6" stroke-dasharray="452" stroke-dashoffset="282" />
+            <circle id="arcNY" cx="100" cy="100" r="62" fill="none" stroke="var(--color-ny)" stroke-width="6" stroke-dasharray="452" stroke-dashoffset="282" />
+            <circle id="arcOverlap" cx="100" cy="100" r="67" fill="none" stroke="var(--color-overlap)" stroke-width="8" stroke-dasharray="452" stroke-dashoffset="376" />
+
+            <line id="clockHand" x1="100" y1="100" x2="100" y2="18" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" />
+            <circle cx="100" cy="100" r="4" fill="#ffffff" />
+          </svg>
+
+          <div class="clock-center-info">
+            <div class="time-digital" id="timeDigital">00:00:00</div>
+            <div class="session-active-label" id="sessionActiveLabel">ASIAN SESSION</div>
+            <div class="timezone-label">JAKARTA (UTC+7 / WIB)</div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-container">
+          <div class="slider-box">
+            <div class="slider-header">
+              <span>Simulasi Jam & Cek Rilis Berita</span>
+              <span id="sliderValText" style="font-family: 'JetBrains Mono'; color: var(--color-london);">REAL TIME</span>
+            </div>
+            <input type="range" id="timeSlider" min="0" max="1439" value="0">
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-primary" id="btnToggleRealtime">🔄 Reset Realtime</button>
+            <button class="btn" id="btnEnableNotifications">🔔 Tes Alarm & Sound</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Kalender Ekonomi Terintegrasi -->
+      <div class="card">
+        <div class="card-title">
+          <span>Kalender Ekonomi Synchronized</span>
+          <span style="color: var(--color-gold); font-size: 0.78rem;">⭐ AUTOMATIC ALERT ENGINE</span>
+        </div>
+
+        <div class="cal-header">
+          <span>S</span><span>S</span><span>R</span><span>K</span><span>J</span><span>S</span><span>M</span>
+        </div>
+
+        <div class="cal-grid" id="calendarGrid"></div>
+
+        <!-- Dynamic Live Banner Alert -->
+        <div class="event-banner" id="eventBanner">
+          <div>
+            <div class="banner-title" id="bannerTitle">Status Rilis Berita</div>
+            <div class="banner-desc" id="bannerDesc">Sistem sedang memantau tanggal & jam rilis berita secara otomatis.</div>
+          </div>
+          <button class="btn" id="btnExportCalendar" style="padding: 6px 12px; font-size: 0.75rem;">📅 Sync .ICS</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Grid: Profile Likuiditas & Sesi -->
+    <div class="card">
+      <div class="card-title">
+        <span>Profil Likuiditas Real-Time & Peta Sesi Pasar</span>
+        <span>24-Hour Distribution</span>
+      </div>
+
+      <div class="chart-box">
+        <canvas id="liquidityCanvas"></canvas>
+      </div>
+
+      <div class="session-list">
+        <div class="session-item">
+          <div class="session-info">
+            <div class="session-indicator" style="background: var(--color-asia);"></div>
+            <div>
+              <div class="session-name">Sesi Asia (Tokyo/Sydney)</div>
+              <div class="session-time">06:00 - 15:00 WIB</div>
+            </div>
+          </div>
+          <div class="session-tag" id="tagAsia">NORMAL</div>
+        </div>
+
+        <div class="session-item">
+          <div class="session-info">
+            <div class="session-indicator" style="background: var(--color-london);"></div>
+            <div>
+              <div class="session-name">Sesi London (Eropa)</div>
+              <div class="session-time">14:00 - 23:00 WIB</div>
+            </div>
+          </div>
+          <div class="session-tag" id="tagLondon">HIGH VOLATILITY</div>
+        </div>
+
+        <div class="session-item">
+          <div class="session-info">
+            <div class="session-indicator" style="background: var(--color-ny);"></div>
+            <div>
+              <div class="session-name">Sesi New York (Amerika)</div>
+              <div class="session-time">19:00 - 04:00 WIB</div>
+            </div>
+          </div>
+          <div class="session-tag" id="tagNY">HIGH VOLATILITY</div>
+        </div>
+
+        <div class="session-item" style="border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.05);">
+          <div class="session-info">
+            <div class="session-indicator" style="background: var(--color-overlap);"></div>
+            <div>
+              <div class="session-name">Golden Overlap (NY + London)</div>
+              <div class="session-time">20:00 - 00:00 WIB</div>
+            </div>
+          </div>
+          <div class="session-tag tag-overlap" id="tagOverlap">PEAK LIQUIDITY</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      World Trading Time-Navigator & Economic Sync Master &copy; 2026 | Built for High-Precision Discipline & Time Execution.
+    </footer>
+  </div>
+
+  <script>
+    // Economic Data Mapping with Hour/Minute Triggers for Automatic Sync
+    const economicEvents = {
+      2: { name: 'ISM Manufacturing PMI', hour: 21, min: 0, timeStr: '21:00 WIB', impact: 'HIGH', desc: 'Indikator manufaktur US. Waspada breakout awal bulan!' },
+      5: { name: 'NFP (Non-Farm Payrolls)', hour: 19, min: 30, timeStr: '19:30 WIB', impact: 'CRITICAL', desc: 'Data Tenaga Kerja US. Volatilitas ekstrim saat rilis!' },
+      12: { name: 'CPI (Consumer Price Index)', hour: 19, min: 30, timeStr: '19:30 WIB', impact: 'CRITICAL', desc: 'Data inflasi utama US. Penentu tren jangka menengah!' },
+      13: { name: 'PPI (Producer Price Index)', hour: 19, min: 30, timeStr: '19:30 WIB', impact: 'HIGH', desc: 'Indeks harga produsen US. Konfirmasi tekanan inflasi.' },
+      20: { name: 'FOMC Rate Statement', hour: 1, min: 0, timeStr: '01:00 WIB', impact: 'CRITICAL', desc: 'Keputusan Suku Bunga The Fed & Konferensi Pers.' },
+      27: { name: 'PCE Price Index', hour: 19, min: 30, timeStr: '19:30 WIB', impact: 'CRITICAL', desc: 'Indikator inflasi favorit The Fed. Volatilitas tinggi!' }
+    };
+
+    // Application State
+    let isRealtime = true;
+    let simulatedMinutes = 0;
+    let audioCtx = null;
+    let lastAlertDayTriggered = -1;
+
+    // DOM Elements
+    const timeDigital = document.getElementById('timeDigital');
+    const liveDateText = document.getElementById('liveDateText');
+    const sessionActiveLabel = document.getElementById('sessionActiveLabel');
+    const marketStateText = document.getElementById('marketStateText');
+    const statusDot = document.getElementById('statusDot');
+    const clockHand = document.getElementById('clockHand');
+    const timeSlider = document.getElementById('timeSlider');
+    const sliderValText = document.getElementById('sliderValText');
+    const btnToggleRealtime = document.getElementById('btnToggleRealtime');
+    const btnEnableNotifications = document.getElementById('btnEnableNotifications');
+    const btnExportCalendar = document.getElementById('btnExportCalendar');
+    const calendarGrid = document.getElementById('calendarGrid');
+    const eventBanner = document.getElementById('eventBanner');
+    const bannerTitle = document.getElementById('bannerTitle');
+    const bannerDesc = document.getElementById('bannerDesc');
+    const canvas = document.getElementById('liquidityCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const tagAsia = document.getElementById('tagAsia');
+    const tagLondon = document.getElementById('tagLondon');
+    const tagNY = document.getElementById('tagNY');
+    const tagOverlap = document.getElementById('tagOverlap');
+
+    // Web Audio Sound Generator
+    function playChimeSound(freq = 880) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.5, audioCtx.currentTime + 0.4);
+
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.8);
+      } catch (e) {
+        console.log('Audio error:', e);
+      }
+    }
+
+    // Render Calendar Matrix
+    function renderEconomicCalendar() {
+      calendarGrid.innerHTML = '';
+      const totalDays = 30;
+      const startOffset = 3; // Start on Wednesday
+
+      for (let i = 0; i < startOffset; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'cal-day empty';
+        calendarGrid.appendChild(emptyCell);
+      }
+
+      const now = new Date();
+      const currentToday = now.getDate();
+
+      for (let day = 1; day <= totalDays; day++) {
+        const dayCell = document.createElement('div');
+        dayCell.className = 'cal-day';
+        dayCell.id = `cal-day-${day}`;
+        dayCell.innerText = day;
+
+        if (day === currentToday) {
+          dayCell.classList.add('today');
+        }
+
+        if (economicEvents[day]) {
+          dayCell.classList.add('event');
+          const badge = document.createElement('div');
+          badge.className = 'event-badge';
+          badge.innerText = economicEvents[day].name.split(' ')[0];
+          dayCell.appendChild(badge);
+
+          dayCell.addEventListener('click', () => {
+            const ev = economicEvents[day];
+            bannerTitle.innerText = `Tgl ${day}: ${ev.name} (${ev.timeStr})`;
+            bannerTitle.style.color = 'var(--color-gold)';
+            bannerDesc.innerText = ev.desc;
+            eventBanner.classList.remove('alert-active');
+            playChimeSound(660);
+          });
+        }
+
+        calendarGrid.appendChild(dayCell);
+      }
+    }
+
+    // Canvas Resize
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Clock Arc Helper
+    function setArcDash(elemId, startHour, endHour) {
+      const circle = document.getElementById(elemId);
+      const circumference = 2 * Math.PI * parseFloat(circle.getAttribute('r'));
+      let durationHours = endHour >= startHour ? (endHour - startHour) : (24 - startHour + endHour);
+      let dashLength = (durationHours / 24) * circumference;
+      let offset = circumference - ((startHour / 24) * circumference);
+
+      circle.style.strokeDasharray = `${dashLength} ${circumference - dashLength}`;
+      circle.style.strokeDashoffset = -offset;
+    }
+
+    function initClockArcs() {
+      setArcDash('arcAsia', 6, 15);
+      setArcDash('arcLondon', 14, 23);
+      setArcDash('arcNY', 19, 4);
+      setArcDash('arcOverlap', 20, 0);
+    }
+    initClockArcs();
+
+    // Core Loop & Synchronized Alert Check
+    function updateApp() {
+      const now = new Date();
+      let hours, minutes, seconds, dayOfWeek, currentDayOfMonth;
+
+      if (isRealtime) {
+        hours = now.getHours();
+        minutes = now.getMinutes();
+        seconds = now.getSeconds();
+        dayOfWeek = now.getDay();
+        currentDayOfMonth = now.getDate();
+        simulatedMinutes = hours * 60 + minutes;
+        timeSlider.value = simulatedMinutes;
+        sliderValText.innerText = 'REAL TIME';
+        sliderValText.style.color = 'var(--color-london)';
+      } else {
+        simulatedMinutes = parseInt(timeSlider.value);
+        hours = Math.floor(simulatedMinutes / 60);
+        minutes = simulatedMinutes % 60;
+        seconds = 0;
+        dayOfWeek = now.getDay();
+        currentDayOfMonth = now.getDate();
+        sliderValText.innerText = `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')} (SIMULATION)`;
+        sliderValText.style.color = 'var(--color-asia)';
+      }
+
+      // Digital Clock Display
+      timeDigital.innerText = `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+      liveDateText.innerText = now.toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short' });
+
+      // Radial Pointer
+      const totalMinutes = hours * 60 + minutes + (seconds / 60);
+      const angle = (totalMinutes / 1440) * 360;
+      clockHand.setAttribute('transform', `rotate(${angle} 100 100)`);
+
+      // Weekend & Session Analysis
+      const isWeekend = (dayOfWeek === 6 && hours >= 5) || (dayOfWeek === 0) || (dayOfWeek === 1 && hours < 5);
+      let activeSessions = [];
+      let currentLiquidity = 'LOW';
+
+      if (isWeekend) {
+        marketStateText.innerText = 'MARKET CLOSED (WEEKEND)';
+        marketStateText.style.color = '#ef4444';
+        statusDot.style.background = '#ef4444';
+        statusDot.style.boxShadow = '0 0 10px #ef4444';
+        sessionActiveLabel.innerText = 'PASAR LIBUR (WEEKEND)';
+        sessionActiveLabel.style.color = 'var(--text-muted)';
+      } else {
+        const inAsia = (hours >= 6 && hours < 15);
+        const inLondon = (hours >= 14 && hours < 23);
+        const inNY = (hours >= 19 || hours < 4);
+        const inOverlap = (hours >= 20 && hours < 24);
+
+        if (inAsia) activeSessions.push('ASIA');
+        if (inLondon) activeSessions.push('LONDON');
+        if (inNY) activeSessions.push('NEW YORK');
+
+        updateTags(inAsia, inLondon, inNY, inOverlap);
+
+        if (inOverlap) {
+          marketStateText.innerText = 'GOLDEN OVERLAP ACTIVE';
+          marketStateText.style.color = 'var(--color-overlap)';
+          statusDot.style.background = 'var(--color-overlap)';
+          statusDot.style.boxShadow = '0 0 10px var(--color-overlap)';
+          sessionActiveLabel.innerText = '🔥 PEAK OVERLAP (NY + LONDON)';
+          sessionActiveLabel.style.color = 'var(--color-overlap)';
+          currentLiquidity = 'PEAK';
+        } else if (activeSessions.length > 0) {
+          marketStateText.innerText = `ACTIVE: ${activeSessions.join(' + ')}`;
+          marketStateText.style.color = '#10b981';
+          statusDot.style.background = '#10b981';
+          statusDot.style.boxShadow = '0 0 10px #10b981';
+          sessionActiveLabel.innerText = `SESI AKTIF: ${activeSessions.join(' | ')}`;
+          sessionActiveLabel.style.color = '#10b981';
+          currentLiquidity = activeSessions.length > 1 ? 'HIGH' : 'MEDIUM';
+        } else {
+          marketStateText.innerText = 'DEAD ZONE / KONSOLIDASI';
+          marketStateText.style.color = 'var(--text-muted)';
+          statusDot.style.background = 'var(--text-muted)';
+          statusDot.style.boxShadow = 'none';
+          sessionActiveLabel.innerText = 'KONSOLIDASI SEPI';
+          sessionActiveLabel.style.color = 'var(--text-muted)';
+          currentLiquidity = 'LOW';
+        }
+      }
+
+      // Check Automatic Synchronization with Economic News Event
+      checkEconomicNewsSync(currentDayOfMonth, hours, minutes);
+
+      // Render Canvas
+      drawLiquidityGraph(totalMinutes, currentLiquidity, isWeekend);
+    }
+
+    // Dynamic Synchronization Engine with News Events
+    function checkEconomicNewsSync(day, hour, min) {
+      const todayEvent = economicEvents[day];
+      
+      if (todayEvent) {
+        const eventTotalMin = todayEvent.hour * 60 + todayEvent.min;
+        const currentTotalMin = hour * 60 + min;
+        const diffMin = eventTotalMin - currentTotalMin;
+
+        const dayElem = document.getElementById(`cal-day-${day}`);
+        if (dayElem) dayElem.classList.add('active-news-day');
+
+        // Alert triggered if time is within 30 minutes before or during release
+        if (diffMin >= 0 && diffMin <= 30) {
+          bannerTitle.innerText = `🚨 REMINDER: ${todayEvent.name} (${diffMin} MNT LAGI)`;
+          bannerTitle.style.color = '#ef4444';
+          bannerDesc.innerText = `Waktu rlis: ${todayEvent.timeStr}. ${todayEvent.desc}`;
+          eventBanner.classList.add('alert-active');
+
+          if (lastAlertDayTriggered !== day) {
+            playChimeSound(987); // High alert tone
+            lastAlertDayTriggered = day;
+            
+            if ('Notification' in window && Notification.permission === 'granted') {
+              new Notification(`🚨 RILIS BERITA: ${todayEvent.name}`, {
+                body: `Data rilis dalam ${diffMin} menit (${todayEvent.timeStr}). Persiapkan risk management!`,
+                icon: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=192&h=192&q=80'
+              });
+            }
+          }
+        } else if (diffMin < 0 && diffMin >= -60) {
+          bannerTitle.innerText = `⚡ SEDANG/BARU RILIS: ${todayEvent.name}`;
+          bannerTitle.style.color = 'var(--color-gold)';
+          bannerDesc.innerText = `Data rilis jam ${todayEvent.timeStr}. Hindari impulsive trade!`;
+          eventBanner.classList.add('alert-active');
+        } else {
+          bannerTitle.innerText = `Tgl ${day}: ${todayEvent.name} (${todayEvent.timeStr})`;
+          bannerTitle.style.color = 'var(--color-gold)';
+          bannerDesc.innerText = todayEvent.desc;
+          eventBanner.classList.remove('alert-active');
+        }
+      } else {
+        bannerTitle.innerText = `Status Rilis Berita`;
+        bannerTitle.style.color = 'var(--color-gold)';
+        bannerDesc.innerText = `Tidak ada rilis berita High-Impact utama untuk tanggal ini (${day}).`;
+        eventBanner.classList.remove('alert-active');
+      }
+    }
+
+    function updateTags(asia, london, ny, overlap) {
+      tagAsia.className = asia ? 'session-tag tag-active' : 'session-tag';
+      tagLondon.className = london ? 'session-tag tag-active' : 'session-tag';
+      tagNY.className = ny ? 'session-tag tag-active' : 'session-tag';
+      tagOverlap.className = overlap ? 'session-tag tag-overlap' : 'session-tag';
+    }
+
+    function drawLiquidityGraph(currentTotalMin, liquidityLevel, isWeekend) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const width = canvas.width;
+      const height = canvas.height;
+      const points = 96;
+
+      ctx.beginPath();
+      ctx.moveTo(0, height);
+
+      for (let i = 0; i <= points; i++) {
+        const x = (i / points) * width;
+        const hour = (i * 15) / 60;
+        let baseHeight = 15;
+
+        if (!isWeekend) {
+          if (hour >= 6 && hour <= 15) baseHeight += 25 * Math.sin(((hour - 6) / 9) * Math.PI);
+          if (hour >= 14 && hour <= 23) baseHeight += 45 * Math.sin(((hour - 14) / 9) * Math.PI);
+          if (hour >= 19 || hour <= 4) {
+            let nyH = hour >= 19 ? (hour - 19) : (hour + 5);
+            baseHeight += 50 * Math.sin((nyH / 9) * Math.PI);
+          }
+          if (hour >= 20 && hour <= 24) baseHeight += 35;
+        }
+
+        const y = height - (baseHeight / 120) * (height - 20);
+        ctx.lineTo(x, y);
+      }
+
+      ctx.lineTo(width, height);
+      ctx.closePath();
+
+      const grad = ctx.createLinearGradient(0, 0, 0, height);
+      if (isWeekend) {
+        grad.addColorStop(0, 'rgba(156, 163, 175, 0.2)');
+        grad.addColorStop(1, 'rgba(156, 163, 175, 0.0)');
+      } else if (liquidityLevel === 'PEAK') {
+        grad.addColorStop(0, 'rgba(239, 68, 68, 0.4)');
+        grad.addColorStop(1, 'rgba(239, 68, 68, 0.0)');
+      } else {
+        grad.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
+        grad.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+      }
+
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      const trackerX = (currentTotalMin / 1440) * width;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(trackerX, 0);
+      ctx.lineTo(trackerX, height);
+      ctx.stroke();
+    }
+
+    // Control Handlers
+    timeSlider.addEventListener('input', () => {
+      isRealtime = false;
+      updateApp();
+    });
+
+    btnToggleRealtime.addEventListener('click', () => {
+      isRealtime = true;
+      lastAlertDayTriggered = -1;
+      updateApp();
+    });
+
+    btnEnableNotifications.addEventListener('click', () => {
+      playChimeSound(880);
+      if ('Notification' in window) {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            alert('✅ Sistem Synchronized Alert Berhasil Diaktifkan!\nAnda akan menerima notifikasi otomatis sebelum rilis berita High Impact.');
+          }
+        });
+      }
+    });
+
+    btnExportCalendar.addEventListener('click', () => {
+      const icsData = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Trading Time & News Navigator//ID
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Synchronized High Impact Events
+BEGIN:VEVENT
+SUMMARY:🔥 NFP (Non-Farm Payrolls)
+DESCRIPTION:Data Tenaga Kerja US - Volatilitas Tinggi
+DTSTART;TZID=Asia/Jakarta:20261105T193000
+DTEND;TZID=Asia/Jakarta:20261105T203000
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🔥 CPI Inflasi US
+DESCRIPTION:Data Inflasi Utama US - High Impact
+DTSTART;TZID=Asia/Jakarta:20261112T193000
+DTEND;TZID=Asia/Jakarta:20261112T203000
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Economic_Sync_Calendar.ics';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+
+    // Init Engine
+    renderEconomicCalendar();
+    setInterval(updateApp, 1000);
+    updateApp();
+  </script>
+</body>
+</html>
